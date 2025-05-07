@@ -10,6 +10,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"net/url"
 )
 
 // 获取电站信息
@@ -56,13 +57,15 @@ func (c *Client) QueryPowerStationMonitor(request QueryPowerStationMonitorReques
 
 // 单电站状态详情信息 GetPowerStationMonitorDetail
 func (c *Client) GetPowerStationMonitorDetail(request GetPowerStationMonitorDetailRequest) (*GetPowerStationMonitorDetailResponse, error) {
-	requestBytes, err := json.Marshal(&request)
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println("GetPowerStationMonitorDetail:", string(requestBytes))
-	buf := bytes.NewBuffer(requestBytes)
-	body, err := c.doGetRequest("GetPowerStationMonitorDetail", buf)
+	//requestBytes, err := json.Marshal(&request)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//fmt.Println("GetPowerStationMonitorDetail:", string(requestBytes))
+	//buf := bytes.NewBuffer(requestBytes)
+	params := url.Values{}
+	params.Add("id", request.id)
+	body, err := c.doGetRequest("GetPowerStationMonitorDetail", params)
 	if err != nil {
 		return nil, err
 	}
@@ -76,13 +79,17 @@ func (c *Client) GetPowerStationMonitorDetail(request GetPowerStationMonitorDeta
 
 // 根据 SN 获取电站详情 GetPowerStationMonitorDetailBySn
 func (c *Client) GetPowerStationMonitorDetailBySn(request GetPowerStationMonitorDetailBySnRequest) (*GetPowerStationMonitorDetailBySnResponse, error) {
-	requestBytes, err := json.Marshal(&request)
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println("GetPowerStationMonitorDetail:", string(requestBytes))
-	buf := bytes.NewBuffer(requestBytes)
-	body, err := c.doGetRequest("GetPowerStationMonitorDetail", buf)
+	//requestBytes, err := json.Marshal(&request)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//fmt.Println("GetPowerStationMonitorDetail:", string(requestBytes))
+	//buf := bytes.NewBuffer(requestBytes)
+	params := url.Values{}
+	params.Add("sn", request.Sn)
+	params.Add("page_index", fmt.Sprintf("%d",request.PageIndex))
+	params.Add("page_size", fmt.Sprintf("%d",request.PageSize))
+	body, err := c.doGetRequest("GetPowerStationMonitorDetail", params)
 	if err != nil {
 		return nil, err
 	}
@@ -261,13 +268,17 @@ func (c *Client) GetInverterMoreData(request GetInverterMoreDataRequest) (*GetIn
 
 // 批量获取逆变器实时发电数据 GetInventersDatas Get
 func (c *Client) GetInventersDatas(request GetInventersDatasRequest) (*GetInventersDatasResponse, error) {
-	requestBytes, err := json.Marshal(&request)
-	if err != nil {
-		return nil, err
+	//requestBytes, err := json.Marshal(&request)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//fmt.Println("GetInventersDatas:", string(requestBytes))
+	//buf := bytes.NewBuffer(requestBytes)
+	params := url.Values{}
+	for _, sn := range request.Sns {
+		params.Add("sns", sn)
 	}
-	fmt.Println("GetInventersDatas:", string(requestBytes))
-	buf := bytes.NewBuffer(requestBytes)
-	body, err := c.doPostRequest("GetInventersDatas", buf)
+	body, err := c.doGetRequest("GetInventersDatas", params)
 	if err != nil {
 		return nil, err
 	}
