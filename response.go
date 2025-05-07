@@ -41,7 +41,7 @@ type QueryPowerStationMonitorResponse struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`
 	Data struct {
-		Record string `json:"record"` // 记录数
+		Record int `json:"record"` // 记录数
 		List   []struct {
 			PowerstationId   string  `json:"powerstation_id"`   //电站 id
 			Stationname      string  `json:"stationname"`       //电站名称
@@ -128,7 +128,7 @@ type QueryInventersResponse struct {
 			ItName       string  `json:"it_name"`        //设备名称
 			ItSn         string  `json:"it_sn"`          //SN
 			ItType       string  `json:"it_type"`        //设备类型
-			ItCapacity   float64 `json:"it_capacity"`    //容量 kw
+			ItCapacity   string `json:"it_capacity"`    //容量 kw
 			ItCheckcode  string  `json:"it_checkcode"`   //校验码 默认不提供
 			ConnDate     string  `json:"conn_date"`      //接入日期
 			ItChangeFlag bool    `json:"it_change_flag"` //是否更换 0:未更换 1：已更换 更换后设备将认 为已经不再发电

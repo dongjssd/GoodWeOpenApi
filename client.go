@@ -13,16 +13,25 @@ import (
 )
 
 type Client struct {
+	Username string
+	Password string
+	Token string
 }
 
-func InitClient() *Client {
-	return &Client{}
+func InitClient(username string, password string) *Client {
+	return &Client{
+		Username: username,
+		Password: password,
+	}
 }
 
 // 发起请求
 func (c *Client) doPostRequest(url string, buf io.Reader) ([]byte, error) {
 	req, _ := http.NewRequest("POST", ApiDomain+url, buf)
 	req.Header.Set("Content-Type", "application/json")
+	if url != "GetToken"{
+		req.Header.Set("Token", c.Token)
+	}
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if resp != nil {
