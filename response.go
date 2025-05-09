@@ -6,6 +6,24 @@
 
 package GoodWeOpenApi
 
+type GetUserPowerStationResponse struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+	Data struct {
+		Record int `json:"record"`
+		List   []struct {
+			ID             string `json:"id"`              // 电站ID
+			PwName         string `json:"pw_name"`         // 电站名称
+			ConnDate       string `json:"conn_date"`       // 接入时间
+			PwCapacity     string `json:"pw_capacity"`     // 电站容量
+			PwType         string `json:"pw_type"`         // 电站类型
+			PwInventersnum string `json:"pw_inventersnum"` // 组件数量
+			Notes          string `json:"notes"`           // 电站备注
+			OrgID          string `json:"org_id"`          // 组织ID
+		} `json:"list"`
+	} `json:"data"`
+}
+
 type GetPowerStationByIDResponse struct {
 	Code int    `json:"code"` //0,
 	Msg  string `json:"msg"`
@@ -123,15 +141,15 @@ type QueryInventersResponse struct {
 	Data struct {
 		Record int `json:"record"`
 		List   []struct {
-			Id           string  `json:"id"`             //设备 id
-			PwId         string  `json:"pw_id"`          //电站 id
-			ItName       string  `json:"it_name"`        //设备名称
-			ItSn         string  `json:"it_sn"`          //SN
-			ItType       string  `json:"it_type"`        //设备类型
+			Id           string `json:"id"`             //设备 id
+			PwId         string `json:"pw_id"`          //电站 id
+			ItName       string `json:"it_name"`        //设备名称
+			ItSn         string `json:"it_sn"`          //SN
+			ItType       string `json:"it_type"`        //设备类型
 			ItCapacity   string `json:"it_capacity"`    //容量 kw
-			ItCheckcode  string  `json:"it_checkcode"`   //校验码 默认不提供
-			ConnDate     string  `json:"conn_date"`      //接入日期
-			ItChangeFlag bool    `json:"it_change_flag"` //是否更换 0:未更换 1：已更换 更换后设备将认 为已经不再发电
+			ItCheckcode  string `json:"it_checkcode"`   //校验码 默认不提供
+			ConnDate     string `json:"conn_date"`      //接入日期
+			ItChangeFlag bool   `json:"it_change_flag"` //是否更换 0:未更换 1：已更换 更换后设备将认 为已经不再发电
 		} `json:"list"`
 	} `json:"data"`
 }

@@ -13,6 +13,27 @@ import (
 	"net/url"
 )
 
+// 获取用户电站列表
+// 获取当前用户当前组织和下级组织电站列表
+func (c *Client) GetUserPowerStation(request GetUserPowerStationRequest) (*GetUserPowerStationResponse, error) {
+	requestBytes, err := json.Marshal(&request)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println("GetUserPowerStation:", string(requestBytes))
+	buf := bytes.NewBuffer(requestBytes)
+	body, err := c.doPostRequest("GetUserPowerStation", buf)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Printf("body:%+v", string(body))
+	response := GetUserPowerStationResponse{}
+	if err = json.Unmarshal(body, &response); err != nil {
+		return nil, err
+	}
+	return &response, nil
+}
+
 // 获取电站信息
 // 获取当前用户当前组织或下级电站的信息，包含图片和业主信息
 func (c *Client) GetPowerStationByID(request GetPowerStationByIDRequest) (*GetPowerStationByIDResponse, error) {
