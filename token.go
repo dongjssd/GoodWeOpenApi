@@ -38,10 +38,8 @@ type GetTokenRequest struct {
 
 type GetTokenResponse struct {
 	Data struct {
-		Account string `json:"account"`
-		Pwd     string `json:"pwd"`
 		Token   string `json:"token"`
-		Expired string `json:"expired"`
+		Expired int `json:"expired"`
 	} `json:"data"`
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`

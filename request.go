@@ -8,6 +8,13 @@ package GoodWeOpenApi
 
 import "time"
 
+type GetUserPowerStationRequest struct {
+	Key string `json:"key"` // 电站名称或设备 sn
+	Type int `json:"type"` // 0:电站 1:sn 默认 0
+	PageIndex          int    `json:"page_index"`          //当前页 是
+	PageSize           int    `json:"page_size"`           //每页记录数 默认 20 是
+}
+
 type GetPowerStationByIDRequest struct {
 	Id string `json:"id"`
 }
