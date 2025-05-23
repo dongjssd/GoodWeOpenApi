@@ -23,8 +23,8 @@ type QueryPowerStationMonitorRequest struct {
 	Key                string `json:"key"`                 //50 电站名称或 sn 编码 否
 	Adcode             string `json:"adcode"`              //区域编码 否
 	Orderby            string `json:"orderby"`             //排序规则入升序：xxxx 降序：xxx desc；capacity：  容量pac_kw：单 kw 功率to_hour：等效小时 eday：今日发电量 etotal：累计发电量 目前只提供这 5 类排序 不填默认 按照电站名称升序
-	Condition          int    `json:"condition"`           //0:根据电站查询 1：根据 sn 查询 否
-	PowerstationStatus int    `json:"powerstation_status"` //电站状态(“” or null:全部,-1：离线 //0：待机 1：发电中 2：停机 -2： //无设备),不填代表全部
+	Condition          *int   `json:"condition,omitempty"`           //0:根据电站查询 1：根据 sn 查询 否,
+	PowerstationStatus *int   `json:"powerstation_status,omitempty"` //电站状态(“” or null:全部,-1：离线 //0：待机 1：发电中 2：停机 -2： //无设备),不填代表全部
 	PageIndex          int    `json:"page_index"`          //当前页 是
 	PageSize           int    `json:"page_size"`           //每页记录数 默认 20 是
 }
