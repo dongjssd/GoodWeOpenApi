@@ -37,13 +37,15 @@ func (c *Client) GetUserPowerStation(request GetUserPowerStationRequest) (*GetUs
 // 获取电站信息
 // 获取当前用户当前组织或下级电站的信息，包含图片和业主信息
 func (c *Client) GetPowerStationByID(request GetPowerStationByIDRequest) (*GetPowerStationByIDResponse, error) {
-	requestBytes, err := json.Marshal(&request)
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println("GetPowerStationByID:", string(requestBytes))
-	buf := bytes.NewBuffer(requestBytes)
-	body, err := c.doPostRequest("GetPowerStationByID", buf)
+	//requestBytes, err := json.Marshal(&request)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//fmt.Println("GetPowerStationByID:", string(requestBytes))
+	//buf := bytes.NewBuffer(requestBytes)
+	params := url.Values{}
+	params.Add("id", request.Id)
+	body, err := c.doGetRequest("GetPowerStationByID", params)
 	if err != nil {
 		return nil, err
 	}
