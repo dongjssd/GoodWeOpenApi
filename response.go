@@ -130,7 +130,7 @@ type GetPowerStationPowerResponse struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`
 	Data []struct {
-		Date  string  `json:"date"`  //日期
+		Date  any     `json:"date"`  //日期
 		Power float64 `json:"power"` //发电量
 	} `json:"data"`
 }
